@@ -1,0 +1,5 @@
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\bin\Debug\HSVS.AutomatedTestCases.Common.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\bin\Debug\HSVS.AutomatedTestCases.Common.pdb
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\obj\Debug\HSVS.AutomatedTestCases.Common.csprojResolveAssemblyReference.cache
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\obj\Debug\HSVS.AutomatedTestCases.Common.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\obj\Debug\HSVS.AutomatedTestCases.Common.pdb

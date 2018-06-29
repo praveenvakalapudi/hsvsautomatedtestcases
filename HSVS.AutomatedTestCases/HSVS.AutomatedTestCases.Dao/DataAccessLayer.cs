@@ -12,13 +12,15 @@ namespace HSVS.AutomatedTestCases.Dao
 {
     public class DataAccessLayer
     {
-        public string _SourceConnection = Convert.ToString(ConfigurationManager.AppSettings["SOURCEDB"]);
-        public string _DestinationConnection = Convert.ToString(ConfigurationManager.AppSettings["DESTINATIONDB"]);
+        public string _SourceConnection;
+        public string _DestinationConnection;
         readonly NpgsqlConnection sourceConnServer;
         readonly NpgsqlConnection destinationConnServer;
         readonly LogFileHelper _logger;
         public DataAccessLayer()
         {
+            _SourceConnection = Convert.ToString(ConfigurationManager.AppSettings["SOURCEDB"]);
+            _DestinationConnection = Convert.ToString(ConfigurationManager.AppSettings["DESTINATIONDB"]);
             sourceConnServer = new NpgsqlConnection(_SourceConnection);
             destinationConnServer = new NpgsqlConnection(_DestinationConnection);
             _logger = new LogFileHelper();
@@ -45,7 +47,7 @@ namespace HSVS.AutomatedTestCases.Dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine("SOURCE DB EXECUTION Exception : SQL statement - " + ex.Message);
+                _logger.WriteToFile("SOURCE DB EXECUTION Exception : SQL statement - " + ex.Message);
             }
             return dt;
         }
@@ -72,7 +74,21 @@ namespace HSVS.AutomatedTestCases.Dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine("DESTINATION DB EXECUTION : Exception - " + ex.Message);
+                _logger.WriteToFile("DESTINATION DB EXECUTION : Exception - " + ex.Message);
+            }
+            return dt;
+        }
+
+        public DataTable CustomQuery(string sql)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = GenericExecution_Source(sql);
+            }
+            catch (Exception ex)
+            {
+                _logger.WriteToFile("CustomQuery : Exception - " + ex.Message);
             }
             return dt;
         }

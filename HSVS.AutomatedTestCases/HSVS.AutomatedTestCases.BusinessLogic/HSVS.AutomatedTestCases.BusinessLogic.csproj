@@ -43,6 +43,16 @@
     <Compile Include="BusinessLogicLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HSVS.AutomatedTestCases.Dao\HSVS.AutomatedTestCases.Dao.csproj">
+      <Project>{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}</Project>
+      <Name>HSVS.AutomatedTestCases.Dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj">
+      <Project>{E007C258-155D-4784-8967-EAD63C0CFA0C}</Project>
+      <Name>HSVS.AutomatedTestCases.Logger</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

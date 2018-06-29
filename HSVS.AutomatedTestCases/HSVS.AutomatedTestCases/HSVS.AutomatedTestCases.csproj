@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HSVS.AutomatedTestCases.BusinessLogic\HSVS.AutomatedTestCases.BusinessLogic.csproj">
+      <Project>{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}</Project>
+      <Name>HSVS.AutomatedTestCases.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj">
       <Project>{E007C258-155D-4784-8967-EAD63C0CFA0C}</Project>
       <Name>HSVS.AutomatedTestCases.Logger</Name>
