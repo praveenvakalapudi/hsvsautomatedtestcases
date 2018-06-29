@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj">
+      <Project>{E007C258-155D-4784-8967-EAD63C0CFA0C}</Project>
+      <Name>HSVS.AutomatedTestCases.Logger</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

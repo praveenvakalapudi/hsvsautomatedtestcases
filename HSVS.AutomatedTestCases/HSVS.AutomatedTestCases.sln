@@ -5,6 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases", "HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.csproj", "{F981AF25-2BEF-4DF4-9949-B682E0FF7281}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Dao", "HSVS.AutomatedTestCases.Dao\HSVS.AutomatedTestCases.Dao.csproj", "{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Common", "HSVS.AutomatedTestCases.Common\HSVS.AutomatedTestCases.Common.csproj", "{04E74876-1ABD-474A-A79A-211FA755F59C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Model", "HSVS.AutomatedTestCases.Model\HSVS.AutomatedTestCases.Model.csproj", "{1640607F-1CFC-47E2-9A6E-AED17616DF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.BusinessLogic", "HSVS.AutomatedTestCases.BusinessLogic\HSVS.AutomatedTestCases.BusinessLogic.csproj", "{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Logger", "HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj", "{E007C258-155D-4784-8967-EAD63C0CFA0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{F981AF25-2BEF-4DF4-9949-B682E0FF7281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F981AF25-2BEF-4DF4-9949-B682E0FF7281}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F981AF25-2BEF-4DF4-9949-B682E0FF7281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DAEEC34-FE6F-48A4-BF3D-C145FB7F4AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E74876-1ABD-474A-A79A-211FA755F59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E74876-1ABD-474A-A79A-211FA755F59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E74876-1ABD-474A-A79A-211FA755F59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E74876-1ABD-474A-A79A-211FA755F59C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1640607F-1CFC-47E2-9A6E-AED17616DF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1640607F-1CFC-47E2-9A6E-AED17616DF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1640607F-1CFC-47E2-9A6E-AED17616DF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1640607F-1CFC-47E2-9A6E-AED17616DF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFEDFB47-D0DD-40AB-8CCC-48C8BE75E845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
