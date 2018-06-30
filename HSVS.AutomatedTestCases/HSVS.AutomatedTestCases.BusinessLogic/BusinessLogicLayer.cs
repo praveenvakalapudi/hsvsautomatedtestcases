@@ -117,5 +117,11 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
                 _logger.WriteToFile("InsertDatatoTable - Exception :" + ex.Message);
             }
         }
+
+        public void CleanData(string tableName)
+        {
+            DataAccessLayer objDAL = new DataAccessLayer();
+            objDAL.CleanTableData_Destination(tableName);
+        }
     }
 }

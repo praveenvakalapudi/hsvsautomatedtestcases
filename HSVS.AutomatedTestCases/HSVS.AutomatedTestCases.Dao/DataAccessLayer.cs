@@ -92,6 +92,22 @@ namespace HSVS.AutomatedTestCases.Dao
             }
             return dt;
         }
+
+        public DataTable CleanTableData_Destination(string tableName)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                string sql = "truncate table " + tableName + ";";
+                dt = GenericExecution_Destination(sql);
+            }
+            catch (Exception ex)
+            {
+                _logger.WriteToFile("TruncateTable_Local : Exception - " + ex.Message);
+            }
+            return dt;
+        }
     }
 
 }

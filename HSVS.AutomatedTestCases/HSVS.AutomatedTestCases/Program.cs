@@ -79,11 +79,14 @@ namespace HSVS.AutomatedTestCases
 
                 for (var i = 0; i < tableswithoutHID.Length; i++)
                 {
+                    logger.WriteToFile("Getting data for the table : " + tableswithoutHID[i]);
                     objBusiness.GetDatafromQueryandInsert("select * from " + tableswithoutHID[i] + ";", tableswithoutHID[i]);
                 }
                 #endregion
 
                 #region INSERT HOSPITAL TABLE
+
+                logger.WriteToFile("Getting data for the table : hospital");
                 objBusiness.GetDatafromQueryandInsert("select * from public.hospital where id IN (" + hid + ")", "public.hospital");
                 #endregion
 
@@ -92,7 +95,8 @@ namespace HSVS.AutomatedTestCases
 
                 for (var i = 0; i < tableswithHID.Length; i++)
                 {
-                    //objBusiness.GetDatafromQueryandInsert("select * from " + tableswithHID[i] + " where hid IN (" + hid + ")", tableswithHID[i]);
+                    logger.WriteToFile("Getting data for the table : " + tableswithHID[i]);
+                    objBusiness.GetDatafromQueryandInsert("select * from " + tableswithHID[i] + " where hid IN (" + hid + ")", tableswithHID[i]);
                 }
                 #endregion
             }
