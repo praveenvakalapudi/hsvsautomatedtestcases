@@ -38,6 +38,12 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             DataTable dt = objDAL.CustomQuery(sql);
             return dt;
         }
+        public DataTable MyCustomQuery(string sql)
+        {
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.CustomQuery(sql);
+            return dt;
+        }
 
         public DataTable GetDatafromQueryandInsert(string sql, string tableName)
         {
