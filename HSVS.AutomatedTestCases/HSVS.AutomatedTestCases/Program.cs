@@ -60,20 +60,27 @@ namespace HSVS.AutomatedTestCases
             LogFileHelper logger = new LogFileHelper();
             try
             {
-                string path = @"D:\AccionLabs\Help\LocalDB\Functions";
+                Console.WriteLine("Enter the file Path");
+                //string path = @"D:\AccionLabs\Help\LocalDB\Functions";
+                var path = Console.ReadLine();
                 foreach (string fileName in Directory.GetFiles(path))
                 {
+                    //CHECK FOR EXTENSION - .SQL
+                    string ext = Path.GetExtension(fileName);
                     //GET EACH FILE
-                    var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                    using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+                    if (ext.ToUpper() == (".sql").ToUpper())
                     {
-                        string functionContent = streamReader.ReadToEnd();
-                        if (!string.IsNullOrEmpty(functionContent))
+                        var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                        using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
-                            //SEND FILENAME AND FILECONTENT FOR EACH FILE
-                            objBusiness.CreateFunctionfromFile(fileName, functionContent);
-                        }
+                            string functionContent = streamReader.ReadToEnd();
+                            if (!string.IsNullOrEmpty(functionContent))
+                            {
+                                //SEND FILENAME AND FILECONTENT FOR EACH FILE
+                                objBusiness.CreateFunctionfromFile(fileName, functionContent);
+                            }
 
+                        }
                     }
                 }
             }

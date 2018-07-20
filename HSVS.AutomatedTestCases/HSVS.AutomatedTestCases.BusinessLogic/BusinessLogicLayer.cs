@@ -42,6 +42,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
         {
             DataAccessLayer objDAL = new DataAccessLayer();
             DataTable dt = objDAL.CustomQuery(sql);
+            //DumpDataTable(dt);
             return dt;
         }
 
@@ -51,6 +52,27 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             DataTable dt = objDAL.CustomQuery(sql);
             InsertDatatoTable(tableName, dt);
             return dt;
+        }
+        public static string DumpDataTable(DataTable table)
+        {
+            string data = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            if (null != table && null != table.Rows)
+            {
+                foreach (DataRow dataRow in table.Rows)
+                {
+                    foreach (var item in dataRow.ItemArray)
+                    {
+                        sb.Append(item);
+                        sb.Append(',');
+                    }
+                    sb.AppendLine();
+                }
+
+                data = sb.ToString();
+            }
+            return data;
         }
 
         public void InsertDatatoTable(string tablename, DataTable dt)
