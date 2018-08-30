@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Bus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.Logger", "HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj", "{E007C258-155D-4784-8967-EAD63C0CFA0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSVS.AutomatedTestCases.UnitTests", "HSVS.AutomatedTestCases.UnitTests\HSVS.AutomatedTestCases.UnitTests.csproj", "{EE5FE2DF-CF3B-4D77-B5DA-79BFA678E68A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E007C258-155D-4784-8967-EAD63C0CFA0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE5FE2DF-CF3B-4D77-B5DA-79BFA678E68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE5FE2DF-CF3B-4D77-B5DA-79BFA678E68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE5FE2DF-CF3B-4D77-B5DA-79BFA678E68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE5FE2DF-CF3B-4D77-B5DA-79BFA678E68A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

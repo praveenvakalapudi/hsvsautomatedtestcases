@@ -21,6 +21,7 @@ namespace HSVS.AutomatedTestCases
             Console.WriteLine("1. Load Functions from Path");
             Console.WriteLine("2. Load Table data");
             Console.WriteLine("3. Custom Query");
+            Console.WriteLine("4. Check Count: Sample");
             var choice = Console.ReadLine();
             switch (choice)
             {
@@ -33,6 +34,10 @@ namespace HSVS.AutomatedTestCases
                 case "3":
                     ExecuteCustomQuery();
                     break;
+                case "4":
+                    CheckHospitalCount();
+                    break;
+                    //CheckHospitalCount
 
             }
 
@@ -129,6 +134,15 @@ namespace HSVS.AutomatedTestCases
             {
                 logger.WriteToFile("LoadTables method exception : " + ex.Message);
             }
+        }
+        public static void CheckHospitalCount()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            //INSERT
+            //EXECUTE FUNCTION
+            //ASSERT THE RESULT
+            obj.InsertSampleData(1, "Praveen", "999999999");
+            int a = obj.GetSampleTableDataCount();
         }
     }
 }
