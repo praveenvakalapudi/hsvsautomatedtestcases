@@ -20,3 +20,7 @@ D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTest
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\obj\Debug\HSVS.AutomatedTestCases.UnitTests.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\obj\Debug\HSVS.AutomatedTestCases.UnitTests.pdb
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.UnitTests.dll.config
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.DataGeneration.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.Common.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.DataGeneration.pdb
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.Common.pdb

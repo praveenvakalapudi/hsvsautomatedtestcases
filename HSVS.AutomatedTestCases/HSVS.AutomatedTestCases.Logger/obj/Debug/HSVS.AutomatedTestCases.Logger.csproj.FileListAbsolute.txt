@@ -2,3 +2,4 @@ D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTest
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Logger\bin\Debug\HSVS.AutomatedTestCases.Logger.pdb
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Logger\obj\Debug\HSVS.AutomatedTestCases.Logger.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Logger\obj\Debug\HSVS.AutomatedTestCases.Logger.pdb
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Logger\obj\Debug\HSVS.AutomatedTestCases.Logger.csprojResolveAssemblyReference.cache

@@ -16,3 +16,7 @@ D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTest
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\obj\Debug\HSVS.AutomatedTestCases.BusinessLogic.csprojResolveAssemblyReference.cache
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\obj\Debug\HSVS.AutomatedTestCases.BusinessLogic.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\obj\Debug\HSVS.AutomatedTestCases.BusinessLogic.pdb
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.Common.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.DataGeneration.dll
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.Common.pdb
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.DataGeneration.pdb
