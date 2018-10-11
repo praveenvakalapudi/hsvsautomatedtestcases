@@ -174,7 +174,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             string myQuery = "";
             myQuery = "select * from campaign_targeting.patient_species_check(" + hid + "," + patientid + ",'" + speciesIds + "')";
             DataAccessLayer objDAL = new DataAccessLayer();
-            DataTable dt = objDAL.GenericExecution_Destination(myQuery);
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
             if (dt != null && dt.Rows.Count > 0)
             {
 
@@ -190,7 +190,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             string myQuery = "";
             myQuery = "select * from campaign_targeting.patient_age_criteria_check(" + hid + ","+ patientid + ",'"+ startInterval + "','"+ endInterval + "')";
             DataAccessLayer objDAL = new DataAccessLayer();
-            DataTable dt = objDAL.GenericExecution_Destination(myQuery);
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
             if (dt != null && dt.Rows.Count > 0)
             {
 
