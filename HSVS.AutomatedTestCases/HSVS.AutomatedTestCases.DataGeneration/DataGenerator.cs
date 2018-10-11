@@ -94,6 +94,20 @@ namespace HSVS.AutomatedTestCases.DataGeneration
             return lstLineItem;
         }
 
+        public List<public_pms_species_lookup> GenerateSpeciesLookup()
+        {
+            List<public_pms_species_lookup> lst = new List<public_pms_species_lookup>();
+            public_pms_species_lookup speciesLookup = null;
+            try
+            {
+                speciesLookup = new public_pms_species_lookup();
+            }
+            catch (Exception ex)
+            {
+            }
+            return lst;
+        }
+
         
     }
 }

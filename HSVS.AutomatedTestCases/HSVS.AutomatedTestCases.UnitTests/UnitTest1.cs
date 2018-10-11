@@ -31,7 +31,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             int hid = 2882;
             string my_run_date = "2018-09-17";
             string myinterval = "1 day";
-            DateTime dt = new DateTime();
+            //DateTime dt = new DateTime();
             BeginTestCases obj = new BeginTestCases();
             BusinessLogicLayer objBusiness = new BusinessLogicLayer();
 

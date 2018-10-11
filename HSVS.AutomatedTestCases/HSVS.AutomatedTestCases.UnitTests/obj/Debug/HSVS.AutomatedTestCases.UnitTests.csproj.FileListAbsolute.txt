@@ -1,7 +1,6 @@
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.UnitTests.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.UnitTests.pdb
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.BusinessLogic.dll
-D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.Logger.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\HSVS.AutomatedTestCases.Dao.dll
 D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\bin\Debug\Npgsql.dll

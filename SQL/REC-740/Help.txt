@@ -1,0 +1,8 @@
+Function: get_patient_by_species_and_breed
+	  Tables involved
+		pms_species_lookup
+
+
+
+PORT : 5433
+pwd: 1234
