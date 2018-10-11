@@ -168,6 +168,22 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
         }
 
         #region EMAIL
+        public int Patient_Species_Check(int hid, long patientid, string speciesIds)
+        {
+            int retVal = 0;
+            string myQuery = "";
+            myQuery = "select * from campaign_targeting.patient_species_check(" + hid + "," + patientid + ",'" + speciesIds + "')";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Destination(myQuery);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            }
+            return retVal;
+        }
+
         public int Patient_Age_Criteria_Check(int hid, long patientid, string startInterval, string endInterval)
         {
             int retVal = 0;
