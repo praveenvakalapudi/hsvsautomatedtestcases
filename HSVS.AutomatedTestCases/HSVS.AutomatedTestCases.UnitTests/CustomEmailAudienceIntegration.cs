@@ -354,6 +354,66 @@ namespace HSVS.AutomatedTestCases.UnitTests
 
 
         #region INCLUSION
+        #region WHEN MATCH ANY SERVICE TRUE
+        [TestMethod]
+        public void patient_inclusion_check_returns_true_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_true()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = true;
+            string inclusionServiceIds = "{25202410,25153625,25153576,53285157,25153624,26098532,26098532}";
+            string includedInterval = "12 year";
+           
+            var result = obj.Patient_Inclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void patient_inclusion_check_returns_false_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_true()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = true;
+            string inclusionServiceIds = "{25202410,25153625,25153576,53285157,25153624,26098532,26098532}";
+            string includedInterval = "1 year";
+
+            var result = obj.Patient_Inclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(0, result);
+        }
+        #endregion
+
+        #region WHEN MATCH ANY SERVICE FALSE
+        [TestMethod]
+        public void patient_inclusion_check_returns_true_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_false()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = false;
+            string inclusionServiceIds = "{25202410,25153625,25153576,53285157,25153624,26098532,26098532}";
+            string includedInterval = "12 year";
+
+            var result = obj.Patient_Inclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void patient_inclusion_check_returns_false_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_false()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = false;
+            string inclusionServiceIds = "{25202410,25153625,25153576,53285157,25153624,26098532,26098532}";
+            string includedInterval = "1 year";
+
+            var result = obj.Patient_Inclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(0, result);
+        }
+
+        #endregion
         #endregion
 
         #region EXCLUSION
