@@ -250,6 +250,23 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             }
             return retVal;
         }
+
+        public int Patient_Exclusion_Check(int hid, long patientid, bool matchanyservice, string excludedServiceIds, string excludedInterval)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            int retVal = 0;
+            string myQuery = "";
+            myQuery = "select * from email.get_patient_by_excluded_list(" + hid + "," + patientid + "," + matchanyservice + "," + bll.ReturnNullIfEmpty(excludedServiceIds) + "," + bll.ReturnNullIfEmpty(excludedInterval) + ")";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            }
+            return retVal;
+        }
         #endregion
 
 

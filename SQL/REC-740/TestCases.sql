@@ -86,12 +86,15 @@ select * from email.get_patient_by_included_list(2882,164445457,false,'{25202410
 
 
 -- EXCLUSION
+-- 	MATCH ANY SERVICE - TRUE
+select * from email.get_patient_by_excluded_list(2882,164445457,true,'{26098531}', '12 year') --true
+select * from email.get_patient_by_excluded_list(2882,164445457,true,'{26098531}', '1 year') --false
 
+-- 	MATCH ANY SERVICE - FALSE
+select * from email.get_patient_by_excluded_list(2882,164445457,false,'{26098531}', '12 year') --true
+select * from email.get_patient_by_excluded_list(2882,164445457,false,'{26098531}', '1 year') --false
 
-
-
-
-
+select * from email.get_patient_by_excluded_list(2882,164445457,true,'{25202410,25153625,25153576,53285157,25153624,26098532,26098532}', '1 year') -- true
 
 
 

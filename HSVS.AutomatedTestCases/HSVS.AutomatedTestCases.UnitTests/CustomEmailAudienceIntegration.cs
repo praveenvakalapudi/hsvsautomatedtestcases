@@ -20,14 +20,6 @@ namespace HSVS.AutomatedTestCases.UnitTests
             public string startIntervalYearsTrueCase { get; set; }
             public string startIntervalYearsFalseCase { get; set; }
         }
-        //public Patient LoadPatientDetails(int patientIndex)
-        //{
-        //    Patient objPatient = new Patient();
-        //    if (patientIndex == 1)
-        //    {
-
-        //    }
-        //}
 
         #region SPECIES CHECK
         [TestMethod]
@@ -222,7 +214,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_last_visit_check_returns_false_if_patient_lst_visit_meets_the_targeting_criteria_in_days()
+        public void patient_last_visit_check_returns_false_if_patient_lst_visit_does_not_meets_the_targeting_criteria_in_days()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -251,7 +243,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_last_visit_check_returns_false_if_patient_lst_visit_meets_the_targeting_criteria_in_months()
+        public void patient_last_visit_check_returns_false_if_patient_lst_visit_does_not_meets_the_targeting_criteria_in_months()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -280,7 +272,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_last_visit_check_returns_false_if_patient_lst_visit_meets_the_targeting_criteria_in_range()
+        public void patient_last_visit_check_returns_false_if_patient_lst_visit_does_not_meets_the_targeting_criteria_in_range()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -308,7 +300,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             Assert.AreEqual(1, result);
         }
         [TestMethod]
-        public void patient_last_visit_check_returns_false_if_patient_lst_visit_meets_the_targeting_criteria_in_days_and_range()
+        public void patient_last_visit_check_returns_false_if_patient_lst_visit_does_not_meets_the_targeting_criteria_in_days_and_range()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -337,7 +329,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_last_visit_check_returns_false_if_patient_lst_visit_meets_the_targeting_criteria_in_months_and_range()
+        public void patient_last_visit_check_returns_false_if_patient_lst_visit_does_not_meets_the_targeting_criteria_in_months_and_range()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -370,7 +362,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_inclusion_check_returns_false_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_true()
+        public void patient_inclusion_check_returns_false_if_patient_inclusion_does_not_meets_the_targeting_criteria_when_match_service_true()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -400,7 +392,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         [TestMethod]
-        public void patient_inclusion_check_returns_false_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_false()
+        public void patient_inclusion_check_returns_false_if_patient_inclusion_does_not_meets_the_targeting_criteria_when_match_service_false()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
@@ -417,6 +409,66 @@ namespace HSVS.AutomatedTestCases.UnitTests
         #endregion
 
         #region EXCLUSION
+        #region WHEN MATCH ANY SERVICE TRUE
+        [TestMethod]
+        public void patient_exclusion_check_returns_true_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_true()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = true;
+            string inclusionServiceIds = "{26098531}";
+            string includedInterval = "12 year";
+
+            var result = obj.Patient_Exclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void patient_exclusion_check_returns_false_if_patient_inclusion_does_not_meets_the_targeting_criteria_when_match_service_true()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = true;
+            string inclusionServiceIds = "{26098531}";
+            string includedInterval = "1 year";
+
+            var result = obj.Patient_Exclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(0, result);
+        }
+        #endregion
+
+        #region WHEN MATCH ANY SERVICE FALSE
+        [TestMethod]
+        public void patient_exclusion_check_returns_true_if_patient_inclusion_meets_the_targeting_criteria_when_match_service_false()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = false;
+            string inclusionServiceIds = "{26098531}";
+            string includedInterval = "12 year";
+
+            var result = obj.Patient_Exclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void patient_exclusion_check_returns_false_if_patient_inclusion_does_not_meets_the_targeting_criteria_when_match_service_false()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445457;
+            bool matchAnyService = false;
+            string inclusionServiceIds = "{26098531}";
+            string includedInterval = "1 year";
+
+            var result = obj.Patient_Exclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
+            Assert.AreEqual(0, result);
+        }
+
+        #endregion
         #endregion
     }
 }
