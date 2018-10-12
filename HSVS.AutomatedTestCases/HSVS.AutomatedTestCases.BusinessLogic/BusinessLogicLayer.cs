@@ -177,5 +177,16 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
             return dataTable;
         }
+
+        public string ReturnNullIfEmpty(string value)
+        {
+            //If input is "" return null
+            // If input is 2017-08-08 return '2017-08-08' (with single quotes)
+            if (!string.IsNullOrEmpty(value))
+            {
+                return "'" + value + "'";
+            }
+            return "null";
+        }
     }
 }

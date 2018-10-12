@@ -199,6 +199,40 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             }
             return retVal;
         }
+
+
+        public int Patient_Species_Breed_Check(int hid, long patientid, string speciesIds, string breedIds)
+        {
+            int retVal = 0;
+            string myQuery = "";
+            myQuery = "select * from campaign_targeting.species_breed_check(" + hid + "," + patientid + ",'" + speciesIds + "','" + breedIds + "')";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            }
+            return retVal;
+        }
+
+        public int Patient_Last_Visit_Check(int hid, long patientid, string lastvisit, string lastvisitFrom, string lastvisitTo)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            int retVal = 0;
+            string myQuery = "";
+            myQuery = "select * from email.get_patient_by_last_visit(" + hid + "," + patientid + "," + bll.ReturnNullIfEmpty(lastvisit) + "," + bll.ReturnNullIfEmpty(lastvisitFrom) + "," + bll.ReturnNullIfEmpty(lastvisitTo) + ", false)";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            }
+            return retVal;
+        }
         #endregion
 
 
