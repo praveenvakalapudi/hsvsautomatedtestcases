@@ -9,7 +9,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        //[TestMethod]
         public void CheckHospitalCount()
         {
             BeginTestCases obj = new BeginTestCases();
@@ -25,7 +25,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             Assert.AreEqual(1, obj.GetSampleTableDataCount());
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetActivePatients()
         {
             int hid = 2882;

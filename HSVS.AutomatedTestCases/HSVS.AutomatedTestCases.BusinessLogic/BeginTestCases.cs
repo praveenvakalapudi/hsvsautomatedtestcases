@@ -1,4 +1,5 @@
 ﻿using HSVS.AutomatedTestCases.Common;
+using HSVS.AutomatedTestCases.Common.Targeting;
 using HSVS.AutomatedTestCases.Dao;
 using HSVS.AutomatedTestCases.DataGeneration;
 using HSVS.AutomatedTestCases.Logger;
@@ -267,7 +268,51 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             }
             return retVal;
         }
+
+        public DataTable Targeting(CustomEmail3_Targeting obj)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            int retVal = 0;
+            string myQuery = "";
+            //myQuery = "select * from email.get_targated_audience(" + hid + "," + patientid + "," + matchanyservice + "," + bll.ReturnNullIfEmpty(excludedServiceIds) + "," + bll.ReturnNullIfEmpty(excludedInterval) + ")";
+            myQuery = myQuery + "select * from email.get_targated_audience";
+            myQuery = myQuery + "(";
+            myQuery = myQuery + obj.in_hid + ",";
+            myQuery = myQuery + obj.in_editor_verion_id + ",";
+            myQuery = myQuery + obj.in_marketing_msg_id + ",";
+            myQuery = myQuery + obj.is_other_species + ",";
+            myQuery = myQuery + obj.is_all_breed + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_breed_ids) + ",";
+            myQuery = myQuery + obj.in_is_age_in_range + ",";
+            myQuery = myQuery + obj.in_is_specific_age + ",";
+
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_specific_age) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_age_range_from) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_age_range_to) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service_from) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service_to) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_included_service_ids) + ",";
+            myQuery = myQuery + obj.in_match_any_included_service + ",";
+            myQuery = myQuery + obj.in_match_any_excluded_service + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_included_last_service) + ",";
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_excluded_service_ids) + ",";
+            myQuery = myQuery +bll.ReturnNullIfEmpty(obj.in_excluded_last_service);
+            //myQuery = myQuery + bll.ReturnNullIfEmpty(obj.spec) + ",";
+            myQuery = myQuery + ")";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
+            //if (dt != null && dt.Rows.Count > 0)
+            //{
+
+            //    return Convert.ToInt32(dt.Rows[0][0]);
+
+            //}
+            return dt;
+        }
         #endregion
+
+
 
 
     }

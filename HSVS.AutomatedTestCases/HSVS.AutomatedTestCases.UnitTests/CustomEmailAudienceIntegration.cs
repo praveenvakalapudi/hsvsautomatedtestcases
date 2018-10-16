@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HSVS.AutomatedTestCases.BusinessLogic;
+using HSVS.AutomatedTestCases.Common.Targeting;
+using System.Data;
 
 namespace HSVS.AutomatedTestCases.UnitTests
 {
@@ -356,7 +358,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             bool matchAnyService = true;
             string inclusionServiceIds = "{25202410,25153625,25153576,53285157,25153624,26098532,26098532}";
             string includedInterval = "12 year";
-           
+
             var result = obj.Patient_Inclusion_Check(hid, patientId, matchAnyService, inclusionServiceIds, includedInterval);
             Assert.AreEqual(1, result);
         }
@@ -469,6 +471,40 @@ namespace HSVS.AutomatedTestCases.UnitTests
         }
 
         #endregion
+        #endregion
+
+        #region TARGETING
+        [TestMethod]
+        public void email_target_return_true_if_meets_targeting_criteria()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "{3}";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "{}";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = true;
+            obj.in_specific_age = "";
+            obj.in_age_range_from = "";
+            obj.in_age_range_to = "";
+            obj.in_last_service = "";
+            obj.in_last_service_from = "";
+            obj.in_last_service_to = "";
+            obj.in_included_service_ids = "";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "";
+            obj.in_excluded_service_ids = "";
+            obj.in_excluded_last_service = "";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            Assert.AreEqual(true, objBegin.GetDifferentRecords(dtExpected, dtResult));
+        }
         #endregion
     }
 }
