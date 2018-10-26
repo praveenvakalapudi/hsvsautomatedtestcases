@@ -1,0 +1,31 @@
+Product projects
+---------------------------------------
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Common\HSVS.AutomatedTestCases.Common.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Logger\HSVS.AutomatedTestCases.Logger.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Dao\HSVS.AutomatedTestCases.Dao.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.DataGeneration\HSVS.AutomatedTestCases.DataGeneration.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\HSVS.AutomatedTestCases.BusinessLogic.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.csproj
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Model\HSVS.AutomatedTestCases.Model.csproj
+
+
+Test projects
+---------------------------------------
+D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.UnitTests\HSVS.AutomatedTestCases.UnitTests.csproj
+
+
+Invalid projects
+---------------------------------------
+{none}
+
+
+Skipped projects
+---------------------------------------
+{none}
+
+
+Excluded projects
+---------------------------------------
+{none}
+
+

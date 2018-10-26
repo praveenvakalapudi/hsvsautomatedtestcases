@@ -1,0 +1,8 @@
+¯
+uD:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\BeginTestCases.cs• (08)@)H)R 0=0;5=0;10=0;20=0;30=1;60=0;90=0Z1=7;2=8;4=0;6=0;8=0;10=1;12=0jAilps€‡–¨•­±´rŒ	
+ !"#$%&'()*+-/012345678:;=?@BDEFGHIJKOPQRSTUVWXYZ[\]^_`abcdfgjmnqtuvwxz{|}~‚„…ˆ‰Š‹‘’“”—˜™š›œŸ ¡£¤¥¦§©¬­®¯°±²³´¶¸¹º¼½¾¿ÀÁÂÃÄÆÈÉÊÍÎÏĞÑÒÓÔÕ×ÙÚÛİŞßàáâãäåæèêëìîïğñòóôõö÷ùûüıÿ€‚ƒ„…†‡ˆŠŒ‘’“”–—˜™š›œŸ¡¢£¤¥¦§¨©ª«¬®¯°·¸¾¿x‚¸!')*-057=@BGIJRTUZ[^_`acmqtuwz{}‚„…ˆŠ‘’“—™š›Ÿ¡¦°²³¶¹ÀÂÃÆÉÑÓÔ×Úâäåèëóõöùü„†‡Š–—˜™š›œŸ¡¢£¤¥¦§¨©ª«¬®°·
+yD:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\BusinessLogicLayer.csK 
+(08 @ H R 0=0;5=0;10=0;20=0;30=1;60=0;90=0Z1=6;2=1;4=2;6=0;8=0;10=0;12=1j.r€·¸rà	
+ !"#$%&'()*+,-/023456789:;<>?@ABCDEFGHJKLMOPQRTUVWXYZ[\]_`abcdefghijklnopqstuvwxyz|}~‚ƒ„…†‡ˆ‰Š‹Œ‘’“”–—˜™šœŸ¡¢£¤¥§¨©ª«¬­¯°²³µ¶¹º»¼½¾¿Àx4‚P!'(-/567;>@BDEGJLTUY[\_aceginpsuvz~‚„†ˆŒ’™Ÿ¢¤§©ª¬¯²¹»½ã
+~D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\Properties\AssemblyInfo.csR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0j !"r	
+#$

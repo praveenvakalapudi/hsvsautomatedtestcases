@@ -1,0 +1,4 @@
+É
+`D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases\Program.cs: 8@HR 0=0;5=0;10=1;20=0;30=0;60=0;90=0Z1=1;2=2;4=2;6=0;8=0;10=0;12=0j(2EIKTçéèrä	 !"#$%&'*,-./013456789:;<=>?@ABCDFGHJLMNOPQRSUVXYZ[\]^_`abcdefghjnopqrwx~ÄÅÇÑÖÜáàâäãåêëíìîxÇ4 !#$&',-1357;DFGJLNOQRU^hjnpqwx~ÄÅáêë’
+pD:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases\Properties\AssemblyInfo.csR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0j !"r	
+#$
