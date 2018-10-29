@@ -15,7 +15,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
     public class BeginTestCases
     {
         readonly LogFileHelper _logger;
-        DataGenerator _objDataGen;
+        readonly DataGenerator _objDataGen;
 
 
 
@@ -165,7 +165,6 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 return false;
             }
-            //return ResultDataTable;
         }
 
         #region EMAIL
@@ -189,7 +188,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
         {
             int retVal = 0;
             string myQuery = "";
-            myQuery = "select * from campaign_targeting.patient_age_criteria_check(" + hid + ","+ patientid + ",'"+ startInterval + "','"+ endInterval + "')";
+            myQuery = "select * from campaign_targeting.patient_age_criteria_check(" + hid + "," + patientid + ",'" + startInterval + "','" + endInterval + "')";
             DataAccessLayer objDAL = new DataAccessLayer();
             DataTable dt = objDAL.GenericExecution_Source(myQuery);
             if (dt != null && dt.Rows.Count > 0)
@@ -235,7 +234,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             return retVal;
         }
 
-        public int Patient_Inclusion_Check(int hid, long patientid,bool matchanyservice, string includedServiceIds,string includedInterval)
+        public int Patient_Inclusion_Check(int hid, long patientid, bool matchanyservice, string includedServiceIds, string includedInterval)
         {
             BusinessLogicLayer bll = new BusinessLogicLayer();
             int retVal = 0;
@@ -272,7 +271,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
         public DataTable Targeting(CustomEmail3_Targeting obj)
         {
             BusinessLogicLayer bll = new BusinessLogicLayer();
-            int retVal = 0;
+            //int retVal = 0;
             string myQuery = "";
             //myQuery = "select * from email.get_targated_audience(" + hid + "," + patientid + "," + matchanyservice + "," + bll.ReturnNullIfEmpty(excludedServiceIds) + "," + bll.ReturnNullIfEmpty(excludedInterval) + ")";
             myQuery = myQuery + "select * from email.get_targated_audience";
@@ -297,7 +296,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             myQuery = myQuery + obj.in_match_any_excluded_service + ",";
             myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_included_last_service) + ",";
             myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_excluded_service_ids) + ",";
-            myQuery = myQuery +bll.ReturnNullIfEmpty(obj.in_excluded_last_service);
+            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_excluded_last_service);
             //myQuery = myQuery + bll.ReturnNullIfEmpty(obj.spec) + ",";
             myQuery = myQuery + ")";
             DataAccessLayer objDAL = new DataAccessLayer();

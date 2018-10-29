@@ -1,7 +1,0 @@
-organization=praveenvakalapudi-github
-projectKey=praveenvakalapudi_hsvsautomatedtestcases
-serverUrl=https://sonarcloud.io
-serverVersion=7.4.0.18669
-dashboardUrl=https://sonarcloud.io/dashboard?id=praveenvakalapudi_hsvsautomatedtestcases
-ceTaskId=AWawGqRv94ApvXY3cNpS
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWawGqRv94ApvXY3cNpS

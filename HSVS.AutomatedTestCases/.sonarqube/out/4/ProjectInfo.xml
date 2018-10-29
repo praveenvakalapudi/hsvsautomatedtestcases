@@ -10,8 +10,8 @@
     <AnalysisResult Id="FilesToAnalyze" Location="D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\.sonarqube\out\4\FilesToAnalyze.txt" />
   </AnalysisResults>
   <AnalysisSettings>
-    <Property Name="sonar.cs.roslyn.reportFilePath">D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.BusinessLogic.dll.RoslynCA.json</Property>
-    <Property Name="sonar.cs.analyzer.projectOutPath">D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\.sonarqube\out\4</Property>
+    <Property Name="sonar..roslyn.reportFilePath">D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.BusinessLogic\bin\Debug\HSVS.AutomatedTestCases.BusinessLogic.dll.RoslynCA.json</Property>
+    <Property Name="sonar..analyzer.projectOutPath">D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\.sonarqube\out\4</Property>
   </AnalysisSettings>
   <Configuration>Debug</Configuration>
   <Platform>AnyCPU</Platform>
