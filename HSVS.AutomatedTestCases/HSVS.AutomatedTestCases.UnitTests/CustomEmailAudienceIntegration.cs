@@ -150,7 +150,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             int hid = 2882;
             long patientId = 164445457;
             string startInterval = "1 month";
-            string endInterval = "154 month";
+            string endInterval = "179 month";
             var result = obj.Patient_Age_Criteria_Check(hid, patientId, startInterval, endInterval);
             Assert.AreEqual(1, result);
         }
@@ -346,7 +346,6 @@ namespace HSVS.AutomatedTestCases.UnitTests
 
         #endregion
 
-
         #region INCLUSION
         #region WHEN MATCH ANY SERVICE TRUE
         [TestMethod]
@@ -473,38 +472,570 @@ namespace HSVS.AutomatedTestCases.UnitTests
         #endregion
         #endregion
 
-        #region TARGETING
+        #region MAIN FUNCTION
+
+        #region Species Checks
+
         [TestMethod]
-        public void email_target_return_true_if_meets_targeting_criteria()
+        public void email_target_return_true_if_species_provided()
         {
             BeginTestCases objBegin = new BeginTestCases();
             CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
             obj.in_hid = 2882;
-
             obj.in_editor_verion_id = 3;
             obj.in_marketing_msg_id = 82904;
-            obj.in_species_ids = "{3}";
+            obj.in_species_ids = "'{3,7}'";
             obj.is_other_species = false;
             obj.is_all_breed = false;
-            obj.in_breed_ids = "{}";
+            obj.in_breed_ids = "'{}'";
             obj.in_is_age_in_range = false;
-            obj.in_is_specific_age = true;
-            obj.in_specific_age = "";
-            obj.in_age_range_from = "";
-            obj.in_age_range_to = "";
-            obj.in_last_service = "";
-            obj.in_last_service_from = "";
-            obj.in_last_service_to = "";
-            obj.in_included_service_ids = "";
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
             obj.in_match_any_included_service = false;
             obj.in_match_any_excluded_service = false;
-            obj.in_included_last_service = "";
-            obj.in_excluded_service_ids = "";
-            obj.in_excluded_last_service = "";
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+
+            DataTable dtResult = objBegin.Targeting(obj);
+
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{3,7}'", false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        [TestMethod]
+        public void email_target_return_true_if_other_species_false_and_species_blank()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{}'";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+
+            DataTable dtResult = objBegin.Targeting(obj);
+
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{}'", false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        [TestMethod]
+        public void email_target_return_true_if_other_species_true_and_species_not_blank()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3}'";
+            obj.is_other_species = true;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{}'";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+
+            DataTable dtResult = objBegin.Targeting(obj);
+
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{3}'", true);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        #endregion
+
+        #region Breed Checks
+        [TestMethod]
+        public void email_target_return_true_if_species_and_breed_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
             DataTable dtExpected = new DataTable();
             DataTable dtResult = objBegin.Targeting(obj);
-            Assert.AreEqual(true, objBegin.GetDifferentRecords(dtExpected, dtResult));
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesAndBreedProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
         }
+
+        [TestMethod]
+        public void email_target_return_true_if_species_and_breed_not_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{}'";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesAndBreedProvided("2882", "'{3,7}'", "'{}'");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        #endregion
+
+        #region Age Checks
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_and_age_in_Range_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'100 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedandAgeInRangeProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "1 month", "100 months");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_and_spesific_age_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = false;
+            obj.in_is_specific_age = true;
+            obj.in_specific_age = "'97 months'";
+            obj.in_age_range_from = "null";
+            obj.in_age_range_to = "null";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpesificAgeProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "97 month");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        #endregion
+
+        #region Last Visit Test
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_and_in_last_visit_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "'60 months'";
+            obj.in_last_service_from = "null";
+            obj.in_last_service_to = "null";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisit("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'60 months'");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_and_last_visit_range_provided()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRange("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'");
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        #endregion
+
+        #region Inclusion list
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_any_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, true);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_all_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_any_services_and_last_used_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "'200 months'";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", true);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_all_services_and_last_used_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_match_any_included_service = false;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "'200 months'";
+            obj.in_excluded_service_ids = "'{}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        #endregion
+
+        #region Exclusion List
+
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_any_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, true);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_all_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_excluded_last_service = "null";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_any_services_and_last_used_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = true;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_excluded_last_service = "'200 months'";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", true);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+        [TestMethod]
+        public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_all_services_and_last_used_services()
+        {
+            BeginTestCases objBegin = new BeginTestCases();
+            CustomEmail3_Targeting obj = new CustomEmail3_Targeting();
+            obj.in_hid = 2882;
+            obj.in_editor_verion_id = 3;
+            obj.in_marketing_msg_id = 82904;
+            obj.in_species_ids = "'{3,7}'";
+            obj.is_other_species = false;
+            obj.is_all_breed = false;
+            obj.in_breed_ids = "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'";
+            obj.in_is_age_in_range = true;
+            obj.in_is_specific_age = false;
+            obj.in_specific_age = "null";
+            obj.in_age_range_from = "'1 month'";
+            obj.in_age_range_to = "'200 months'";
+            obj.in_last_service = "null";
+            obj.in_last_service_from = "'2010-01-01'";
+            obj.in_last_service_to = "'2018-01-01'";
+            obj.in_included_service_ids = "'{}'";
+            obj.in_match_any_included_service = true;
+            obj.in_match_any_excluded_service = false;
+            obj.in_included_last_service = "null";
+            obj.in_excluded_service_ids = "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'";
+            obj.in_excluded_last_service = "'200 months'";
+            DataTable dtExpected = new DataTable();
+            DataTable dtResult = objBegin.Targeting(obj);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", false);
+            Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+        }
+
+        #endregion
+
         #endregion
     }
 }

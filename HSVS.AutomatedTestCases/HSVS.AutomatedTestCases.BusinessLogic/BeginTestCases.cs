@@ -271,47 +271,249 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
         public DataTable Targeting(CustomEmail3_Targeting obj)
         {
             BusinessLogicLayer bll = new BusinessLogicLayer();
-            //int retVal = 0;
             string myQuery = "";
-            //myQuery = "select * from email.get_targated_audience(" + hid + "," + patientid + "," + matchanyservice + "," + bll.ReturnNullIfEmpty(excludedServiceIds) + "," + bll.ReturnNullIfEmpty(excludedInterval) + ")";
             myQuery = myQuery + "select * from email.get_targated_audience";
             myQuery = myQuery + "(";
             myQuery = myQuery + obj.in_hid + ",";
             myQuery = myQuery + obj.in_editor_verion_id + ",";
             myQuery = myQuery + obj.in_marketing_msg_id + ",";
+            myQuery = myQuery + obj.in_species_ids + ",";
             myQuery = myQuery + obj.is_other_species + ",";
             myQuery = myQuery + obj.is_all_breed + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_breed_ids) + ",";
+            myQuery = myQuery + obj.in_breed_ids + ",";
             myQuery = myQuery + obj.in_is_age_in_range + ",";
             myQuery = myQuery + obj.in_is_specific_age + ",";
-
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_specific_age) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_age_range_from) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_age_range_to) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service_from) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_last_service_to) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_included_service_ids) + ",";
+            myQuery = myQuery + obj.in_specific_age + ",";
+            myQuery = myQuery + obj.in_age_range_from + ",";
+            myQuery = myQuery + obj.in_age_range_to + ",";
+            myQuery = myQuery + obj.in_last_service + ",";
+            myQuery = myQuery + obj.in_last_service_from + ",";
+            myQuery = myQuery + obj.in_last_service_to + ",";
+            myQuery = myQuery + obj.in_included_service_ids + ",";
             myQuery = myQuery + obj.in_match_any_included_service + ",";
             myQuery = myQuery + obj.in_match_any_excluded_service + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_included_last_service) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_excluded_service_ids) + ",";
-            myQuery = myQuery + bll.ReturnNullIfEmpty(obj.in_excluded_last_service);
-            //myQuery = myQuery + bll.ReturnNullIfEmpty(obj.spec) + ",";
+            myQuery = myQuery + obj.in_included_last_service + ",";
+            myQuery = myQuery + obj.in_excluded_service_ids + ",";
+            myQuery = myQuery + obj.in_excluded_last_service + "";
             myQuery = myQuery + ")";
             DataAccessLayer objDAL = new DataAccessLayer();
             DataTable dt = objDAL.GenericExecution_Source(myQuery);
-            //if (dt != null && dt.Rows.Count > 0)
-            //{
-
-            //    return Convert.ToInt32(dt.Rows[0][0]);
-
-            //}
             return dt;
         }
+
         #endregion
 
+        #region Expected result Data
 
+        public DataTable GetEmailTargetCountWithSpeciesProvided(string hid, string speciesids, bool otherSpecies)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+            if (!otherSpecies && speciesids != "'{}'")
+            {
+                sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+                sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
+                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+                sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+                sb.Append(" and p.hid = " + hid);
+            }
+            else if (!otherSpecies && speciesids == "'{}'")
+            {
+                sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+                sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
+                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+                // sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+                sb.Append(" and p.hid = " + hid);
+            }
+            else
+            {
+                sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+                sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
+                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+                sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 0");
+                sb.Append(" and p.hid = " + hid);
+            }
+
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+        public DataTable GetEmailTargetCountWithSpeciesAndBreedProvided(string hid, string speciesids, string breedIds)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+            if (breedIds != "'{}'")
+            {
+                sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+                sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+                sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+                sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, "  + speciesids + " , " + breedIds + ") = 1");
+                sb.Append(" and p.hid = " + hid);
+            }
+            else
+            {
+                sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+                sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+                sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+                sb.Append(" and p.hid = " + hid);
+            }
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+        public DataTable GetEmailTargetCountWithSpeciesBreedandAgeInRangeProvided(string hid, string speciesids, string breedIds, string startDate, string endDate)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, '" + startDate + "', '" + endDate + "') = 1");
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+        public DataTable GetEmailTargetCountWithSpesificAgeProvided(string hid, string speciesids, string breedIds, string spesificAge)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, '" + spesificAge + "', '" + spesificAge + "') = 1");
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+        public DataTable GetEmailTargetCountWithSpeciesBreedAgeAndLastVisit(string hid, string speciesids, string breedIds, string startDate, string endDate, string lastVisit)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, " + startDate + ", " + endDate + ") = 1");
+            sb.Append(" and email.get_patient_by_last_visit(p.hid, p.id, " + lastVisit + ", null, null, false) = 1");
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+        public DataTable GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRange(string hid, string speciesids, string breedIds, string startDate, string endDate, string lastVisitFrom, string lastVisitTo)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, " + startDate + ", " + endDate + ") = 1");
+            sb.Append(" and email.get_patient_by_last_visit(p.hid, p.id, null, " + lastVisitFrom + ", " + lastVisitTo + ", false) = 1");
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+        public DataTable GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService(string hid, string speciesids, string breedIds, string startDate, string endDate, string lastVisitFrom, string lastVisitTo, string includedServiceList, string lastIncludedService, bool isAnyService)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, " + startDate + ", " + endDate + ") = 1");
+            sb.Append(" and email.get_patient_by_last_visit(p.hid, p.id, null, " + lastVisitFrom + ", " + lastVisitTo + ", false) = 1");
+            if (isAnyService && lastIncludedService == null)
+            {
+                sb.Append(" and email.get_patient_by_included_list(p.hid, p.id, true, " + includedServiceList + ", null) = 1");
+            }
+            else if (!isAnyService && lastIncludedService == null)
+            {
+                sb.Append(" and email.get_patient_by_included_list(p.hid, p.id, false, " + includedServiceList + ", null) = 1");
+            }
+            else if (isAnyService && lastIncludedService != null)
+            {
+                sb.Append(" and email.get_patient_by_included_list(p.hid, p.id, true, " + includedServiceList + "," + lastIncludedService + ") = 1");
+            }
+            else if (!isAnyService && lastIncludedService != null)
+            {
+                sb.Append(" and email.get_patient_by_included_list(p.hid, p.id, false, " + includedServiceList + "," + lastIncludedService + ") = 1");
+            }
+
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+        public DataTable GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService(string hid, string speciesids, string breedIds, string startDate, string endDate, string lastVisitFrom, string lastVisitTo, string excludedServiceList, string lastExcludedService, bool isAnyService)
+        {
+            BusinessLogicLayer bll = new BusinessLogicLayer();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
+            sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
+            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
+            sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
+            sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
+            sb.Append(" and campaign_targeting.patient_age_criteria_check(p.hid, p.id, " + startDate + ", " + endDate + ") = 1");
+            sb.Append(" and email.get_patient_by_last_visit(p.hid, p.id, null, " + lastVisitFrom + ", " + lastVisitTo + ", false) = 1");
+            if (isAnyService && lastExcludedService == null)
+            {
+                sb.Append(" and email.get_patient_by_excluded_list(p.hid, p.id, true, " + excludedServiceList + ", null) = 1");
+            }
+            else if (!isAnyService && lastExcludedService == null)
+            {
+                sb.Append(" and email.get_patient_by_excluded_list(p.hid, p.id, false, " + excludedServiceList + ", null) = 1");
+            }
+            else if (isAnyService && lastExcludedService != null)
+            {
+                sb.Append(" and email.get_patient_by_excluded_list(p.hid, p.id, true, " + excludedServiceList + "," + lastExcludedService + ") = 1");
+            }
+            else if (!isAnyService && lastExcludedService != null)
+            {
+                sb.Append(" and email.get_patient_by_excluded_list(p.hid, p.id, false, " + excludedServiceList + "," + lastExcludedService + ") = 1");
+            }
+
+            sb.Append(" and p.hid = " + hid);
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(sb.ToString());
+            return dt;
+        }
+
+
+        #endregion
 
 
     }
