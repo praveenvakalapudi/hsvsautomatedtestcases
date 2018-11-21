@@ -1037,5 +1037,68 @@ namespace HSVS.AutomatedTestCases.UnitTests
         #endregion
 
         #endregion
+
+        #region PATIENTS_DECEASED_CHECK_TESTS
+        [TestMethod]
+        public void check_patient_deceased_returns_false_if_patient_IS_ACTIVE()
+        {
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 125063736;
+            long clientId = 46127152;
+
+
+            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+            Assert.AreEqual(0, result);
+        }
+        [TestMethod]
+        public void check_patient_deceased_returns_false_if_patient_deceased_date_is_NULL()
+        {
+
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 164445456;
+            long clientId = 96772283;
+
+            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+            Assert.AreEqual(0, result);
+        }
+        [TestMethod]
+        public void check_patient_deceased_returns_true_if_patient_deceased_date_IS_NOT_NULL()
+        {
+
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 42266190;
+            long clientId = 25678699;
+
+            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+            Assert.AreEqual(1, result);
+        }
+        [TestMethod]
+        public void check_patient_deceased_returns_true_if_patient_is_NOT_ACTIVE()
+        {
+
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 95417039;
+            long clientId = 42686444;
+
+            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+            Assert.AreEqual(1, result);
+        }
+        [TestMethod]
+        public void check_patient_deceased_returns_true_if_patient_IS_ACTIVE_and_deceased_date_is_NOT_NULL()
+        {
+
+            BeginTestCases obj = new BeginTestCases();
+            int hid = 2882;
+            long patientId = 95417041;
+            long clientId = 42686444;
+
+            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+            Assert.AreEqual(1, result);
+        }
+        #endregion
     }
 }

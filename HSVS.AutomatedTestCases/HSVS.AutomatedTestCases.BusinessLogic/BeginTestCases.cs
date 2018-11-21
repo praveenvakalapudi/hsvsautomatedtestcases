@@ -514,6 +514,23 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
 
         #endregion
+        #region PATIENTS_DECEASED_CHECK_TESTS
+        public int Patient_Deceased_Check(int hid, long patientid, long clientid)
+        {
+            int retVal = 0;
+            string myQuery = "";
+            myQuery = "select * from email.check_patient_deceased(" + hid + "," + patientid + "," + clientid + ")";
+            DataAccessLayer objDAL = new DataAccessLayer();
+            DataTable dt = objDAL.GenericExecution_Source(myQuery);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            }
+            return retVal;
+        }
+        #endregion
 
 
     }
