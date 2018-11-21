@@ -1,4 +1,0 @@
-D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Model\bin\Debug\HSVS.AutomatedTestCases.Model.dll
-D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Model\bin\Debug\HSVS.AutomatedTestCases.Model.pdb
-D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Model\obj\Debug\HSVS.AutomatedTestCases.Model.dll
-D:\AccionLabs\Help\AutomatedTestCases\HSVS.AutomatedTestCases\HSVS.AutomatedTestCases.Model\obj\Debug\HSVS.AutomatedTestCases.Model.pdb
