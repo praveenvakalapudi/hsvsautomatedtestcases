@@ -85,11 +85,12 @@ namespace HSVS.AutomatedTestCases.UnitTests
         public void patient_specific_age_check_returns_true_if_patient_age_meets_the_targeting_criteria_in_months()
         {
             // This patient with Id: 164445457 DOB: 2005-12-12
+            //startIterval and endInterval are specific so it should be exactly the number of months from DOB to current date
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
             long patientId = 164445457;
-            string startInterval = "154 month";
-            string endInterval = "154 month";
+            string startInterval = "155 month";
+            string endInterval = "155 month";
             var result = obj.Patient_Age_Criteria_Check(hid, patientId, startInterval, endInterval);
             Assert.AreEqual(1, result);
         }
@@ -208,7 +209,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
             long patientId = 164445457;
-            string lastvisit = "41 day";
+            string lastvisit = "100 day";
             string lastVistiFrom = "";
             string lastVistiTo = "";
             var result = obj.Patient_Last_Visit_Check(hid, patientId, lastvisit, lastVistiFrom, lastVistiTo);
@@ -237,7 +238,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
             long patientId = 164445457;
-            string lastvisit = "2 month";
+            string lastvisit = "3 month";
             string lastVistiFrom = "";
             string lastVistiTo = "";
             var result = obj.Patient_Last_Visit_Check(hid, patientId, lastvisit, lastVistiFrom, lastVistiTo);
@@ -1059,7 +1060,6 @@ namespace HSVS.AutomatedTestCases.UnitTests
             int hid = 2882;
             long patientId = 164445456;
             long clientId = 96772283;
-
             var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
             Assert.AreEqual(0, result);
         }
