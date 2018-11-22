@@ -166,21 +166,24 @@ set is_active = true, deceased_date = now()
 where id= 164445456;
 
 update public.patient 
-set is_active = true, deceased_date = now()
+set is_active = true, deceased_date =null
 where id= 77693726;
 
 update public.patient 
-set is_active = true, deceased_date = now()
+set is_active = false, deceased_date = now()
 where id= 95417043;
 
 update public.patient 
-set is_active = true, deceased_date = now()
+set is_active = false, deceased_date =null
 where id= 95417040;
 
 --RESET QUERY
 update public.patient 
 set is_active = true, deceased_date = null
-where id in (164445456,77693726,95417043,95417040)
+where id in (164445456,77693726,95417043,95417040);
+
+select is_active, deceased_date,* from public.patient
+	where id in (164445456,77693726,95417043,95417040);
 
 select * from email.get_patient_by_last_visit(2882,164445457, '1 day',null,null, false)
 select * from email.get_patient_by_last_visit(2882,164445457, '1 day','2018-09-01','2018-10-12', false )
