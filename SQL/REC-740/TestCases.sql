@@ -97,14 +97,90 @@ select * from email.get_patient_by_excluded_list(2882,164445457,false,'{26098531
 select * from email.get_patient_by_excluded_list(2882,164445457,true,'{25202410,25153625,25153576,53285157,25153624,26098532,26098532}', '1 year') -- true
 
 
+-- DECEASED
+
+-- Get Deceased patients list
+	select * from public.patient
+	where hid= 2882 and  deceased_date is not null
+	Patient id: 95417041
+	Client Id: 42686444
+
+	select * from email.is_patient_active(2882, 95417041, 42686444)
+	-- Returns 1 if patinet is active
+	-- Return 0 if patient is deceased
+
+	select * from (select id, pms_id, client_id, hid, formalname, pms_species_id, pms_breed_id, pms_gender_id, color, weight, dob, 
+                               is_active, deceased_date, pms_patient_code_id 
+                          from public.deceased_patient 
+                          where hid = 2882
+      	                	   union 
+                        select id, pms_id, client_id, hid, formalname, pms_species_id, pms_breed_id, pms_gender_id, color, weight, dob, 
+                               is_active, deceased_date, pms_patient_code_id 
+                          from public.patient 
+                          where hid = 2882) deceased_patient_union where (is_active <> true or deceased_date is not null)
+						  and client_id = 42686444 and id = 95417041
 
 
+-- Get Active patients list
+select is_active, deceased_date,* from public.patient
+	where hid= 2882 and  deceased_date  is null
 
---
 
+/*
+         * PATIENTS  ACTIVE AND DECEASED DATE NULL
+         * PATIENT ID : 95417043
+         * CLIENT ID : 46065163
+         * 
+         * 
+         * PATIENTS NOT ACTIVE AND DECEASED DATE NULL
+         * PATIENT ID: 95417039
+         * CLIENT ID: 42686444
+         * 
+         * 
+         * 
+         * PATIENT ACTIVE AND DECEASED DATE NOT NULL
+         * PATIENT ID: 95417041
+         * CLIENT ID: 42686444
+         * 
+         * 
+         * 
+         * PATIENT NOT ACTIVE AND DECEASED DATE NOT NULL
+         * PATIENT ID: 95417041
+         * CLIENT ID: 42686444
+         --   ACTIVE      DECEASED     RESULT EXPECTED
+         --     F            NULL            0
+         --     T            NULL            1  
+         --     F          NOT NULL          0
+         --     T          NOT NULL          0
+         
+         */
+		 
+		 
+164445456
+77693726
+95417043
+95417040
 
+update public.patient 
+set is_active = true, deceased_date = now()
+where id= 164445456;
 
+update public.patient 
+set is_active = true, deceased_date = now()
+where id= 77693726;
 
+update public.patient 
+set is_active = true, deceased_date = now()
+where id= 95417043;
+
+update public.patient 
+set is_active = true, deceased_date = now()
+where id= 95417040;
+
+--RESET QUERY
+update public.patient 
+set is_active = true, deceased_date = null
+where id in (164445456,77693726,95417043,95417040)
 
 select * from email.get_patient_by_last_visit(2882,164445457, '1 day',null,null, false)
 select * from email.get_patient_by_last_visit(2882,164445457, '1 day','2018-09-01','2018-10-12', false )

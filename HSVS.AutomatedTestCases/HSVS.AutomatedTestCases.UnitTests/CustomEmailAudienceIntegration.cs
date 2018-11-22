@@ -1040,65 +1040,153 @@ namespace HSVS.AutomatedTestCases.UnitTests
         #endregion
 
         #region PATIENTS_DECEASED_CHECK_TESTS
+        #region COMMENTED SECTION 
+        //[TestMethod]
+        //public void check_patient_deceased_returns_false_if_patient_IS_ACTIVE()
+        //{
+        //    BeginTestCases obj = new BeginTestCases();
+        //    int hid = 2882;
+        //    long patientId = 125063736;
+        //    long clientId = 46127152;
+
+
+        //    var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+        //    Assert.AreEqual(0, result);
+        //}
+        //[TestMethod]
+        //public void check_patient_deceased_returns_false_if_patient_deceased_date_is_NULL()
+        //{
+
+        //    BeginTestCases obj = new BeginTestCases();
+        //    int hid = 2882;
+        //    long patientId = 164445456;
+        //    long clientId = 96772283;
+        //    var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+        //    Assert.AreEqual(0, result);
+        //}
+        //[TestMethod]
+        //public void check_patient_deceased_returns_true_if_patient_deceased_date_IS_NOT_NULL()
+        //{
+
+        //    BeginTestCases obj = new BeginTestCases();
+        //    int hid = 2882;
+        //    long patientId = 42266190;
+        //    long clientId = 25678699;
+
+        //    var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+        //    Assert.AreEqual(1, result);
+        //}
+        //[TestMethod]
+        //public void check_patient_deceased_returns_true_if_patient_is_NOT_ACTIVE()
+        //{
+
+        //    BeginTestCases obj = new BeginTestCases();
+        //    int hid = 2882;
+        //    long patientId = 95417039;
+        //    long clientId = 42686444;
+
+        //    var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+        //    Assert.AreEqual(1, result);
+        //}
+        //[TestMethod]
+        //public void check_patient_deceased_returns_true_if_patient_IS_ACTIVE_and_deceased_date_is_NOT_NULL()
+        //{
+
+        //    BeginTestCases obj = new BeginTestCases();
+        //    int hid = 2882;
+        //    long patientId = 95417041;
+        //    long clientId = 42686444;
+
+        //    var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
+        //    Assert.AreEqual(1, result);
+        //}
+        #endregion
+
         [TestMethod]
-        public void check_patient_deceased_returns_false_if_patient_IS_ACTIVE()
+        public void is_patient_active_returns_true_if_patient_IS_ACTIVE_and_deceased_date_null()
         {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
-            long patientId = 125063736;
-            long clientId = 46127152;
+            long patientId = 77693726;
+            long clientId = 46065164;
 
 
             var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(1, result);
         }
-        [TestMethod]
-        public void check_patient_deceased_returns_false_if_patient_deceased_date_is_NULL()
-        {
 
+        [TestMethod]
+        public void is_patient_active_returns_false_if_patient_IS_ACTIVE_and_deceased_date_not_null()
+        {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
             long patientId = 164445456;
             long clientId = 96772283;
+
+
             var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
             Assert.AreEqual(0, result);
         }
-        [TestMethod]
-        public void check_patient_deceased_returns_true_if_patient_deceased_date_IS_NOT_NULL()
-        {
 
+        [TestMethod]
+        public void is_patient_active_returns_false_if_patient_IS_NOT_ACTIVE_and_deceased_date_not_null()
+        {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
-            long patientId = 42266190;
-            long clientId = 25678699;
+            long patientId = 95417040;
+            long clientId = 55819777;
+
 
             var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(0, result);
         }
-        [TestMethod]
-        public void check_patient_deceased_returns_true_if_patient_is_NOT_ACTIVE()
-        {
 
+        [TestMethod]
+        public void is_patient_active_returns_false_if_patient_IS_NOT_ACTIVE_and_deceased_date_null()
+        {
             BeginTestCases obj = new BeginTestCases();
             int hid = 2882;
-            long patientId = 95417039;
-            long clientId = 42686444;
+            long patientId = 95417043;
+            long clientId = 46065163;
+
 
             var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(0, result);
         }
-        [TestMethod]
-        public void check_patient_deceased_returns_true_if_patient_IS_ACTIVE_and_deceased_date_is_NOT_NULL()
-        {
 
-            BeginTestCases obj = new BeginTestCases();
-            int hid = 2882;
-            long patientId = 95417041;
-            long clientId = 42686444;
 
-            var result = obj.Patient_Deceased_Check(hid, patientId, clientId);
-            Assert.AreEqual(1, result);
-        }
+
+
+
+
+        /*
+         * PATIENTS  ACTIVE AND DECEASED DATE NULL
+         * PATIENT ID : 95417043
+         * CLIENT ID : 46065163
+         * 
+         * 
+         * PATIENTS NOT ACTIVE AND DECEASED DATE NULL
+         * PATIENT ID: 95417039
+         * CLIENT ID: 42686444
+         * 
+         * 
+         * 
+         * PATIENT ACTIVE AND DECEASED DATE NOT NULL
+         * PATIENT ID: 95417041
+         * CLIENT ID: 42686444
+         * 
+         * 
+         * 
+         * PATIENT NOT ACTIVE AND DECEASED DATE NOT NULL
+         * PATIENT ID: 95417041
+         * CLIENT ID: 42686444
+         --   ACTIVE      DECEASED     RESULT EXPECTED
+         --     F            NULL            0
+         --     T            NULL            1  
+         --     F          NOT NULL          0
+         --     T          NOT NULL          0
+         
+         */
         #endregion
     }
 }
