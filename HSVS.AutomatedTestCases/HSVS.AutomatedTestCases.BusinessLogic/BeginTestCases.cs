@@ -313,7 +313,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
                 sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
-                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
                 sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
                 sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
                 sb.Append(" and p.hid = " + hid);
@@ -322,7 +322,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
                 sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
-                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
                 sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
                 // sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
                 sb.Append(" and p.hid = " + hid);
@@ -331,7 +331,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
                 sb.Append(" from public.patient p  join public.client c on c.id = p.client_id and c.hid =  p.hid");
-                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
                 sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
                 sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 0");
                 sb.Append(" and p.hid = " + hid);
@@ -349,7 +349,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
                 sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
                 sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
                 sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
                 sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, "  + speciesids + " , " + breedIds + ") = 1");
@@ -359,7 +359,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             {
                 sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
                 sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-                sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+                sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
                 sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
                 sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
                 sb.Append(" and p.hid = " + hid);
@@ -375,7 +375,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
@@ -393,7 +393,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
@@ -411,7 +411,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
@@ -430,7 +430,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
@@ -448,7 +448,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             StringBuilder sb = new StringBuilder();
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
@@ -483,7 +483,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
             StringBuilder sb = new StringBuilder();
             sb.Append("select p.hid as out_hid, p.client_id as out_client_id, p.id as out_patient_id, c.first_name as out_first_name, c.last_name as out_last_name, c.email as email");
             sb.Append(" from public.patient p join public.client c on c.id = p.client_id and c.hid =  p.hid ");
-            sb.Append(" where email.check_patient_deceased(p.hid, p.id, p.client_id) = 1");
+            sb.Append(" where email.is_patient_active(p.hid, p.id, p.client_id) = 1");
             sb.Append(" and campaign_targeting.is_patient_email_contactable(p.hid, p.id) = 1");
             sb.Append(" and campaign_targeting.patient_species_check(p.hid, p.id, " + speciesids + ") = 1");
             sb.Append(" and campaign_targeting.species_breed_check(p.hid, p.id, " + speciesids + " , " + breedIds + ") = 1");
