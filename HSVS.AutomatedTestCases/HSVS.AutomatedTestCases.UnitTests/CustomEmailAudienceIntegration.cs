@@ -1,8 +1,11 @@
 ﻿using System;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HSVS.AutomatedTestCases.BusinessLogic;
 using HSVS.AutomatedTestCases.Common.Targeting;
+using System.Linq;
 using System.Data;
+using System.Xml;
 
 namespace HSVS.AutomatedTestCases.UnitTests
 {
@@ -503,12 +506,22 @@ namespace HSVS.AutomatedTestCases.UnitTests
             obj.in_included_last_service = "null";
             obj.in_excluded_service_ids = "'{}'";
             obj.in_excluded_last_service = "null";
-            DataTable dtExpected = new DataTable();
-
+            DataTable dtExpectedResult = new DataTable();
             DataTable dtResult = objBegin.Targeting(obj);
 
+            //Checking for (specied Dog and Cat for hid 2882) 
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{3,7}'", false);
+
+            // First checking for both results and expected result count value, if equal then proceed further
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         [TestMethod]
@@ -543,6 +556,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
 
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{}'", false);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         [TestMethod]
@@ -553,7 +574,7 @@ namespace HSVS.AutomatedTestCases.UnitTests
             obj.in_hid = 2882;
             obj.in_editor_verion_id = 3;
             obj.in_marketing_msg_id = 82904;
-            obj.in_species_ids = "'{3}'";
+            obj.in_species_ids = "'{7,9}'";
             obj.is_other_species = true;
             obj.is_all_breed = false;
             obj.in_breed_ids = "'{}'";
@@ -575,8 +596,15 @@ namespace HSVS.AutomatedTestCases.UnitTests
 
             DataTable dtResult = objBegin.Targeting(obj);
 
-            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{3}'", true);
+            DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesProvided("2882", "'{7,9}'", true);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         #endregion
@@ -612,6 +640,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesAndBreedProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         [TestMethod]
@@ -644,6 +680,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesAndBreedProvided("2882", "'{3,7}'", "'{}'");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         #endregion
 
@@ -678,6 +722,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedandAgeInRangeProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "1 month", "100 months");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         [TestMethod]
@@ -710,6 +762,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpesificAgeProvided("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "97 month");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         #endregion
@@ -745,6 +805,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisit("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'60 months'");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         [TestMethod]
@@ -777,6 +845,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRange("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'");
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         #endregion
@@ -812,6 +888,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, true);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_all_services()
@@ -843,6 +927,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, false);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_any_services_and_last_used_services()
@@ -874,6 +966,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", true);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_Inclusion_services_with_selected_all_services_and_last_used_services()
@@ -905,6 +1005,14 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeIncludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", false);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         #endregion
 
@@ -940,6 +1048,13 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, true);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_all_services()
@@ -971,6 +1086,13 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", null, false);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_any_services_and_last_used_services()
@@ -1002,6 +1124,13 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", true);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
         [TestMethod]
         public void email_target_return_true_if_species_Breed_age_last_visit_range_exclusion_services_with_selected_all_services_and_last_used_services()
@@ -1033,6 +1162,13 @@ namespace HSVS.AutomatedTestCases.UnitTests
             DataTable dtResult = objBegin.Targeting(obj);
             DataTable expectedValue = objBegin.GetEmailTargetCountWithSpeciesBreedAgeAndLastVisitRangeExcludedService("2882", "'{3,7}'", "'{3531346,4994701,1647936,4016004,3019668,3266186,6797245}'", "'1 month'", "'200 months'", "'2010-01-01'", "'2018-01-01'", "'{39235137,77048018,63693452,25153625,25153576,25153579,25153578,67905913,120110531,77048018,25153625}'", "'200 months'", false);
             Assert.AreEqual(expectedValue.Rows.Count, dtResult.Rows.Count);
+            foreach (DataRow actualRowItem in dtResult.Rows)
+            {
+                int resultPatientId = actualRowItem["out_patient_id"] != null ? Convert.ToInt32(actualRowItem["out_patient_id"]) : 0;
+                DataRow expectedRowItem = expectedValue.AsEnumerable().FirstOrDefault(z => z.Field<int>("out_patient_id") == resultPatientId);
+                int expectedPatientId = expectedRowItem["out_patient_id"] != null ? Convert.ToInt32(expectedRowItem["out_patient_id"]) : 0;
+                Assert.AreEqual(resultPatientId, expectedPatientId);
+            }
         }
 
         #endregion
