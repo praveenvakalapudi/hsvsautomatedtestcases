@@ -2,6 +2,7 @@
 using HSVS.AutomatedTestCases.Logger;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,14 @@ namespace HSVS.AutomatedTestCases
             LogFileHelper log = new LogFileHelper();
             string message = "Program Initiated";
             log.WriteToFile(message);
+            EnterChoice();
+
+            message = "Program end";
+            log.WriteToFile(message);
+        }
+        public static void EnterChoice()
+        {
+            Console.WriteLine("Destination Database connected: "+ Convert.ToString(ConfigurationManager.AppSettings["DESTINATIONDB"]));
             Console.WriteLine("Enter your Option");
             Console.WriteLine("1. Load Functions from Path");
             Console.WriteLine("2. Load Table data");
@@ -40,9 +49,6 @@ namespace HSVS.AutomatedTestCases
                     //CheckHospitalCount
 
             }
-
-            message = "Program end";
-            log.WriteToFile(message);
         }
         public static void ExecuteCustomQuery()
         {
@@ -88,6 +94,7 @@ namespace HSVS.AutomatedTestCases
                         }
                     }
                 }
+                EnterChoice();
             }
             catch (Exception ex)
             {

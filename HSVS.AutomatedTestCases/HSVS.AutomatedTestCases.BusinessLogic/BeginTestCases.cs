@@ -57,6 +57,7 @@ namespace HSVS.AutomatedTestCases.BusinessLogic
 
         public void InsertDatatoLineItem()
         {
+            TruncateTable_Destination("public.lineitem");
 
             List<public_lineitem> lstLineItem = _objDataGen.GenerateLineItem();
 
